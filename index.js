@@ -52,16 +52,15 @@ app.post("/books",(req,res)=>{
     })
 })
 app.post("/gmstry",(req,res)=>{
-    const rdb = mysql.createConnection({
+    const newdb = mysql.createConnection({
         host:req.body.host || "",
         user:req.body.user || "",
         password:req.body.password || "",
         database:req.body.db || "",
         port:req.body.port||"",
-        table:req.body.table
     })
 
-    const qg = `SELECT * FROM ${recdotest}`
+    const qg = `SELECT * FROM ${req.body.table}`
 
     const q = "INSERT INTO recdotest (`cariAdi`,`vknTckn`,`genel_toplam`) VALUES (?)"
     // const values =[
@@ -69,7 +68,7 @@ app.post("/gmstry",(req,res)=>{
     //     req.body.vknTckn,
     //     req.body.genel_toplam
     // ]
-    rdb.query(qg,(err,data)=>{
+    newdb.query(qg,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
