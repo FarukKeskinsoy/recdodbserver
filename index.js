@@ -14,7 +14,7 @@ const db= mysql.createConnection({
 const rdb= mysql.createConnection({
     host:"localhost",
     user:"mikrokom",
-    password:"",
+    password:"mikrokom2009/*-+",
     database:"RecDo"
 })
 
