@@ -11,7 +11,7 @@ const db= mysql.createConnection({
     password:"",
     database:"recdo"
 })
-// DESKTOP-GPN9M4H\\SQLEXPRESS
+// DESKTOP-GPN9M4H\\SQLEXPRESSDESKYOP-
 const rdb= mysql.createConnection({
     host:`DESKTOP-GPN9M4H`,
     user:"mikrokom",
@@ -56,7 +56,8 @@ app.post("/gmstry",(req,res)=>{
         host:req.body.host || "",
         user:req.body.user || "",
         password:req.body.password || "",
-        database:req.body.db || ""
+        database:req.body.db || "",
+        port:req.body.port||""
     })
 
     const qg = "SELECT * FROM recdotest"
