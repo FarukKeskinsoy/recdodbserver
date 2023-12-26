@@ -13,9 +13,9 @@ const db= mysql.createConnection({
 })
 const rdb= mysql.createConnection({
     host:"localhost",
-    user:"root",
+    user:"mikrokom",
     password:"",
-    database:"recdotest"
+    database:"RecDo"
 })
 
 app.get("/",(req,res)=>{
