@@ -61,14 +61,16 @@ app.post("/books",(req,res)=>{
         return res.json(data)
     })
 })
+
 app.post("/try",async(req,res)=>{
     const {host,user,password,database,table} =req.body;
 
     const bookPool = mysql.createPool({
-        host:"0.0.0.0",
+        host:`0.0.0.0`,
         user:user,
         password:password,
         database:database,
+        port:3306
     })
     const q =`SELECT * FROM ${table}`
     if(bookPool){
