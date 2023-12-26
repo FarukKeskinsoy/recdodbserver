@@ -63,8 +63,9 @@ app.post("/books",(req,res)=>{
 })
 app.post("/try",async(req,res)=>{
     const {host,user,password,database,table} =req.body;
+    
     const bookPool = mysql.createPool({
-        host:host,
+        host:"127.0.0.1",
         user:user,
         password:password,
         database:database,
@@ -79,9 +80,10 @@ app.post("/try",async(req,res)=>{
     }
     
 })
+
 app.post("/gmstry",async(req,res)=>{
     const pool = mariadb.createPool({
-        host: req.body.host,
+        host: "127.0.0.1",
         user: req.body.user,
         password: req.body.password,
         database: req.body.db,
@@ -118,6 +120,6 @@ app.post("/gmstry",async(req,res)=>{
 // if there is a auyh problem
 
 // ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY "12345678"
-app.listen(process.env.PORT || 8800 ,()=>{
+app.listen(process.env.PORT || 8800,"127.0.0.1",()=>{
     console.log("invoice running !")
 });
