@@ -1,6 +1,7 @@
 import express from "express";
 import mysql from "mysql"
 import cors from "cors"
+import mariadb from 'mariadb';
 
 const app=express()
 app.use(express.json())
@@ -18,6 +19,9 @@ const rdb= mysql.createConnection({
     password:"mikrokom2009/*-+",
     database:"RecDo"
 })
+
+
+
 
 app.get("/",(req,res)=>{
     res.json("Hello from sql backend")
@@ -51,13 +55,26 @@ app.post("/books",(req,res)=>{
         return res.json(data)
     })
 })
-app.post("/gmstry",(req,res)=>{
+app.post("/gmstry",async(req,res)=>{
+    const pool = mariadb.createPool({
+        host: req.body.host,
+        user: req.body.user,
+        password: req.body.password,
+        database: req.body.db,
+        connectionLimit: 5,
+        acquireTimeout: 10000, // Adjust based on your needs (in milliseconds)
+      });
     const newdb = mysql.createConnection({
         host:req.body.host || "",
         user:req.body.user || "",
         password:req.body.password || "",
         database:req.body.db || "",
     })
+    if(req.body){
+        await pool.getConnection().then((conn)=>res.json("bağlandı")).catch(()=>res.json("hata var"))
+    }
+    
+
 
     const qg = `SELECT * FROM ${req.body.table}`
 
