@@ -71,7 +71,7 @@ app.post("/gmstry",async(req,res)=>{
         database:req.body.db || "",
     })
     if(req.body){
-        await pool.getConnection().then((conn)=>res.json("bağlandı")).catch(()=>res.json("hata var"))
+        await pool.getConnection().then((conn)=>res.json("bağlandı")).catch((err)=>res.json("hata var",err))
     }
     
 
