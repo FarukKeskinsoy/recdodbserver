@@ -52,12 +52,12 @@ app.post("/books",(req,res)=>{
 })
 app.post("/gmstry",(req,res)=>{
     const rdb = mysql.createConnection({
-        host:req.body.host,
-        user:req.body.user,
-        password:req.body.password,
-        database:req.body.db
+        host:req.body.host || "",
+        user:req.body.user || "",
+        password:req.body.password || "",
+        database:req.body.db || ""
     })
-    
+
     const qg = "SELECT * FROM recdotest"
 
     const q = "INSERT INTO recdotest (`cariAdi`,`vknTckn`,`genel_toplam`) VALUES (?)"
