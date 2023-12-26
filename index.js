@@ -29,6 +29,13 @@ app.get("/books",(req,res)=>{
         return res.json(data)
     })
 })
+app.get("/gmstry",(req,res)=>{
+    const q = "SELECT * FROM recdotest"
+    rdb.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
 
 app.post("/books",(req,res)=>{
     const q = "INSERT INTO books (`title`,`description`,`cover`) VALUES (?)"
@@ -54,6 +61,7 @@ app.post("/gmstry",(req,res)=>{
         return res.json(data)
     })
 })
+
 // if there is a auyh problem
 
 // ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY "12345678"
