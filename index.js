@@ -63,7 +63,7 @@ app.post("/books",(req,res)=>{
 })
 app.post("/try",async(req,res)=>{
     const {host,user,password,database,table} =req.body;
-    
+
     const bookPool = mysql.createPool({
         host:"127.0.0.1",
         user:user,
@@ -120,6 +120,6 @@ app.post("/gmstry",async(req,res)=>{
 // if there is a auyh problem
 
 // ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY "12345678"
-app.listen(process.env.PORT || 8800,"127.0.0.1",()=>{
+app.listen(process.env.PORT || 8800,"0.0.0.0",()=>{
     console.log("invoice running !")
 });
