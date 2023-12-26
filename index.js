@@ -20,7 +20,12 @@ const rdb= mysql.createConnection({
     database:"RecDo"
 })
 
-
+const bookPool=mysql.createPool({
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"recdo"
+})
 
 
 app.get("/",(req,res)=>{
@@ -28,7 +33,7 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/books",(req,res)=>{
-   
+""
     const q = "SELECT * FROM books"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
@@ -50,10 +55,29 @@ app.post("/books",(req,res)=>{
         req.body.description,
         req.body.cover
     ]
+    
     db.query(q,[values],(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
+})
+app.post("/try",async(req,res)=>{
+    const {host,user,password,database,table} =req.body;
+    const bookPool = mysql.createPool({
+        host:host,
+        user:user,
+        password:password,
+        database:database,
+    })
+    const q =`SELECT * FROM ${table}`
+    if(bookPool){
+        bookPool.query(q,(err,data)=>{
+            if(err) return res.json(err)
+            return res.json(data)
+        })
+
+    }
+    
 })
 app.post("/gmstry",async(req,res)=>{
     const pool = mariadb.createPool({
@@ -70,6 +94,7 @@ app.post("/gmstry",async(req,res)=>{
         password:req.body.password || "",
         database:req.body.db || "",
     })
+    
     if(req.body){
         await pool.getConnection().then((conn)=>res.json("bağlandı")).catch((err)=>res.json({message:"hata var",err:err}))
     }
