@@ -57,7 +57,6 @@ app.post("/gmstry",(req,res)=>{
         user:req.body.user || "",
         password:req.body.password || "",
         database:req.body.db || "",
-        port:req.body.port||"",
     })
 
     const qg = `SELECT * FROM ${req.body.table}`
