@@ -57,10 +57,11 @@ app.post("/gmstry",(req,res)=>{
         user:req.body.user || "",
         password:req.body.password || "",
         database:req.body.db || "",
-        port:req.body.port||""
+        port:req.body.port||"",
+        table:req.body.table
     })
 
-    const qg = "SELECT * FROM recdotest"
+    const qg = `SELECT * FROM ${recdotest}`
 
     const q = "INSERT INTO recdotest (`cariAdi`,`vknTckn`,`genel_toplam`) VALUES (?)"
     // const values =[
