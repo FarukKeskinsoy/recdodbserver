@@ -23,6 +23,7 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/books",(req,res)=>{
+   
     const q = "SELECT * FROM books"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
@@ -50,13 +51,22 @@ app.post("/books",(req,res)=>{
     })
 })
 app.post("/gmstry",(req,res)=>{
+    const rdb = mysql.createConnection({
+        host:req.body.host,
+        user:req.body.user,
+        password:req.body.password,
+        database:req.body.db
+    })
+    
+    const qg = "SELECT * FROM recdotest"
+
     const q = "INSERT INTO recdotest (`cariAdi`,`vknTckn`,`genel_toplam`) VALUES (?)"
-    const values =[
-        req.body.cariAdi,
-        req.body.vknTckn,
-        req.body.genel_toplam
-    ]
-    rdb.query(q,[values],(err,data)=>{
+    // const values =[
+    //     req.body.cariAdi,
+    //     req.body.vknTckn,
+    //     req.body.genel_toplam
+    // ]
+    rdb.query(qg,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
