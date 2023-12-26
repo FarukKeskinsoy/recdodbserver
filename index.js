@@ -11,6 +11,7 @@ const db= mysql.createConnection({
     password:"",
     database:"recdo"
 })
+// DESKTOP-GPN9M4H\\SQLEXPRESS
 const rdb= mysql.createConnection({
     host:`DESKTOP-GPN9M4H`,
     user:"mikrokom",
