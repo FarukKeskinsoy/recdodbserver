@@ -12,7 +12,7 @@ const db= mysql.createConnection({
     database:"recdo"
 })
 const rdb= mysql.createConnection({
-    host:"DESKTOP-GPN9M4H\SQLEXPRESS",
+    host:"DESKTOP-GPN9M4H\\SQLEXPRESS",
     user:"mikrokom",
     password:"mikrokom2009/*-+",
     database:"RecDo"
