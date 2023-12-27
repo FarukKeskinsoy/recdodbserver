@@ -12,20 +12,15 @@ const db= mysql.createConnection({
     password:"",
     database:"recdo"
 })
-// DESKTOP-GPN9M4H\\SQLEXPRESSDESKYOP-
-const rdb= mysql.createConnection({
-    host:`DESKTOP-GPN9M4H`,
-    user:"mikrokom",
-    password:"mikrokom2009/*-+",
-    database:"RecDo"
-})
 
-const bookPool=mysql.createPool({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"recdo"
+const hostingerdb= mysql.createConnection({
+    host:"193.203.168.40",
+    user:"u758955658_root",
+    password:"Faruk7093",
+    database:"u758955658_recdo"
 })
+// DESKTOP-GPN9M4H\\SQLEXPRESSDESKYOP-
+
 
 
 app.get("/",(req,res)=>{
@@ -33,16 +28,17 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/books",(req,res)=>{
-""
+
     const q = "SELECT * FROM books"
     db.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
 })
-app.get("/gmstry",(req,res)=>{
-    const q = "SELECT * FROM recdotest"
-    rdb.query(q,(err,data)=>{
+app.get("/hostinger",(req,res)=>{
+
+    const q = "SELECT * FROM general"
+    hostingerdb.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
@@ -62,64 +58,8 @@ app.post("/books",(req,res)=>{
     })
 })
 
-app.post("/try",async(req,res)=>{
-    const {host,user,password,database,table} =req.body;
-
-    const bookPool = mysql.createPool({
-        host:`0.0.0.0`,
-        user:user,
-        password:password,
-        database:database,
-        port:3306
-    })
-    const q =`SELECT * FROM ${table}`
-    if(bookPool){
-        bookPool.query(q,(err,data)=>{
-            if(err) return res.json(err)
-            return res.json(data)
-        })
-
-    }
-    
-})
-
-app.post("/gmstry",async(req,res)=>{
-    const pool = mariadb.createPool({
-        host: "127.0.0.1",
-        user: req.body.user,
-        password: req.body.password,
-        database: req.body.db,
-        connectionLimit: 5,
-        acquireTimeout: 10000, // Adjust based on your needs (in milliseconds)
-      });
-    const newdb = mysql.createConnection({
-        host:req.body.host || "",
-        user:req.body.user || "",
-        password:req.body.password || "",
-        database:req.body.db || "",
-    })
-    
-    if(req.body){
-        await pool.getConnection().then((conn)=>res.json("bağlandı")).catch((err)=>res.json({message:"hata var",err:err}))
-    }
-    
 
 
-    const qg = `SELECT * FROM ${req.body.table}`
-
-    const q = "INSERT INTO recdotest (`cariAdi`,`vknTckn`,`genel_toplam`) VALUES (?)"
-    // const values =[
-    //     req.body.cariAdi,
-    //     req.body.vknTckn,
-    //     req.body.genel_toplam
-    // ]
-    newdb.query(qg,(err,data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
-
-// if there is a auyh problem
 
 // ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY "12345678"
 app.listen(process.env.PORT || 8800,"0.0.0.0",()=>{
