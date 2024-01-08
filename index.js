@@ -25,18 +25,20 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/books",(req,res)=>{
- const db= mysql.createConnection({
+ const inner= mysql.createConnection({
      host:"127.0.0.1",
      user:"user",
      password:"password",
      database:"recdo",
      port:3306
  })
+ inner.connect()
     const q = "SELECT * FROM books"
-    db.query(q,(err,data)=>{
+    inner.query(q,(err,data)=>{
         if(err) return res.json(err)
         return res.json(data)
     })
+    inner.end()
 })
 
 app.get("/hostinger",(req,res)=>{
