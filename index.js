@@ -29,7 +29,8 @@ app.get("/books",(req,res)=>{
      host:"127.0.0.1",
      user:"user",
      password:"password",
-     database:"recdo"
+     database:"recdo",
+     port:3306
  })
     const q = "SELECT * FROM books"
     db.query(q,(err,data)=>{
