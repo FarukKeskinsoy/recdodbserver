@@ -26,7 +26,7 @@ app.get("/",(req,res)=>{
 
 app.get("/books",(req,res)=>{
  const inner= mysql.createConnection({
-     host:"0.0.0.0",
+     host:"localhost",
      user:"user",
      password:"password",
      database:"recdo",
