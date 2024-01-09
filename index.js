@@ -26,12 +26,11 @@ app.get("/",(req,res)=>{
 
 app.get("/books",(req,res)=>{
  const inner= mysql.createConnection({
-     host:"localhost",
+     host:"127.0.0.1",
      user:"user",
      password:"password",
      database:"recdo",
-     port:3306
- })
+    })
  inner.connect()
     const q = "SELECT * FROM books"
     inner.query(q,(err,data)=>{
